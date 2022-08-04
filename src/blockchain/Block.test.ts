@@ -1,5 +1,6 @@
 import { GENESIS_DATA } from "../constants";
 import { Block } from "./Block";
+import { cryptoHash } from "./cryptoHash";
 
 describe('Block', () => {
   const timestamp = 9999;
@@ -51,6 +52,11 @@ describe('Block', () => {
 
     it('sets a `timestamp`', () => {
       expect(minedBlock.timestamp).not.toEqual(undefined)
+    })
+
+    it('creates a SHA-256 `hash` based on the proper inputs', () => {
+      const expectedHash = cryptoHash(minedBlock.timestamp, lastBlock.hash, minedBlock.data)
+      expect(minedBlock.hash).toEqual(expectedHash)
     })
   })
 

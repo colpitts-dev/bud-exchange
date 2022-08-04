@@ -1,4 +1,5 @@
 import { GENESIS_DATA } from '../constants'
+import { cryptoHash } from './cryptoHash'
 
 export interface IBlock {
   timestamp: number
@@ -27,11 +28,15 @@ class Block implements IBlock {
   }
 
   static mineBlock({ lastBlock, data }: { lastBlock: IBlock; data: any }) {
+
+    const timestamp = Date.now()
+    const lastHash = lastBlock.hash;
+
     return new this({
-      timestamp: Date.now(),
-      lastHash: lastBlock.hash,
-      hash: 'todo-hash',
+      timestamp,
+      lastHash,
       data,
+      hash: cryptoHash(timestamp, lastHash, data),
     })
   }
 }
