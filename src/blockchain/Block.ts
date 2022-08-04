@@ -1,3 +1,5 @@
+import { GENESIS_DATA } from '../constants'
+
 export interface IBlock {
   timestamp: number
   lastHash: string
@@ -18,6 +20,19 @@ class Block implements IBlock {
     this.lastHash = lastHash
     this.hash = hash
     this.data = data
+  }
+
+  static genesis() {
+    return new this(GENESIS_DATA)
+  }
+
+  static mineBlock({ lastBlock, data }: { lastBlock: IBlock; data: any }) {
+    return new this({
+      timestamp: Date.now(),
+      lastHash: lastBlock.hash,
+      hash: 'todo-hash',
+      data,
+    })
   }
 }
 
