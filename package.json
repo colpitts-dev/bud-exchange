@@ -1,0 +1,10 @@
+{
+  "name": "budbucks",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "Adam Colpitts",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^28.1.3"
+  }
+}
