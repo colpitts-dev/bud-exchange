@@ -10,7 +10,7 @@ export interface IBlock {
   difficulty?: number
 }
 
-class Block implements IBlock {
+export class Block implements IBlock {
   timestamp
   lastHash
   hash
@@ -28,7 +28,6 @@ class Block implements IBlock {
   }
 
   static mineBlock({ lastBlock, data }: { lastBlock: IBlock; data: any }) {
-
     const timestamp = Date.now()
     const lastHash = lastBlock.hash;
 
@@ -40,5 +39,3 @@ class Block implements IBlock {
     })
   }
 }
-
-export { Block }
