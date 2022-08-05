@@ -4,7 +4,7 @@ import { cryptoHash } from './cryptoHash'
 export interface IBlockchain {
   chain: IBlock[]
   addBlock: ({ data }: { data: any }) => void
-  replaceChain: (chain:IBlock[]) => IBlock[] | void
+  replaceChain: (chain: IBlock[]) => IBlock[] | void
 }
 
 export class Blockchain implements IBlockchain {
@@ -42,13 +42,19 @@ export class Blockchain implements IBlockchain {
     if (JSON.stringify(chain[0]) !== JSON.stringify(Block.genesis()))
       return false
 
-    for(let i = 1; i < chain.length; i++) {
-      const { timestamp, lastHash, hash, data} = chain[i]
-      const actualLastHash = chain[i-1].hash
+    for (let i = 1; i < chain.length; i++) {
+      const { timestamp, lastHash, hash, nonce, difficulty, data } = chain[i]
+      const actualLastHash = chain[i - 1].hash
 
       if (lastHash !== actualLastHash) return false
 
-      const validataedHash = cryptoHash(timestamp, lastHash, data)
+      const validataedHash = cryptoHash(
+        timestamp,
+        lastHash,
+        data,
+        nonce,
+        difficulty
+      )
 
       if (hash !== validataedHash) return false
     }

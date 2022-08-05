@@ -1,12 +1,7 @@
-import { Blockchain, IBlockchain } from './Blockchain'
-import { Block, IBlock } from './Block'
+import { Blockchain, IBlockchain } from '../Blockchain'
+import { Block, IBlock } from '../Block'
 
-const mockBlock: IBlock = {
-  data: 'mock-data',
-  timestamp: 1,
-  lastHash: 'mock-last-hash',
-  hash: 'mock-hash',
-}
+import { mockBlock } from '../__mocks__/Block.mock'
 
 describe('Blockchain', () => {
   let blockchain: IBlockchain, newChain: IBlockchain, originalChain: IBlock[]
